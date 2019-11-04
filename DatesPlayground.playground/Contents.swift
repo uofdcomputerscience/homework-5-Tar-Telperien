@@ -7,21 +7,18 @@ let date = Date()
 
 // Create a date using today's date and a DateComponents structure
 
-let calendar = Calendar.current
-
-let dateComponents = calendar.dateComponents([Calendar.Component.day, Calendar.Component.month, Calendar.Component.year], from: date)
+let components = DateComponents(calendar: .current, year: 2019, month: 11, day: 3)
+let fromComponents = components.date
 
 // Compare the two dates to see if they occur in the same Calendar day
 
-let compDate = date as NSDate
-
-if compDate.isEqual(to: dateComponents.date)  {
+if Calendar.current.isDate(date, inSameDayAs: fromComponents!) {
     print("Same day!")
 }
 
-let formatter = DateFormatter()
-
 // use the formatter to print the day in a friendly format.
 // hint, use NSDateFormatter.com to get an appropriate printing format string.
-formatter.locale = Locale(identifier: "en_US")
+
+let formatter = DateFormatter()
+formatter.dateFormat = "EEEE, MMM ddth, YYYY"
 print(formatter.string(from: date))
